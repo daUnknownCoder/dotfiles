@@ -1,0 +1,21 @@
+[pyprland]
+plugins = ["scratchpads", "magnify"]
+
+[scratchpads.term]
+command = "kitty -o 'linux_display_server=x11'"
+animation = "fromTop"
+class = "kitty-drop"
+margin = 100
+lazy = true
+# unfocus = "hide"
+size = "85% 80%"
+position = "90% 50%"
+
+[scratchpads.volume]
+command = "pavucontrol --class pavu"
+animation = "fromRight"
+class = "pavucontrol"
+margin = 300
+lazy = false
+unfocus = "hide"
+size = "50% 80%"
