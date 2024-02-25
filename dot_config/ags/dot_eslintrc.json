@@ -1,0 +1,15 @@
+// .eslintrc.json
+{
+    "extends": "prettier",
+    "plugins": [
+        "prettier"
+    ],
+    "rules": {
+        "prettier/prettier": "error"
+        {
+          "rules": {
+            "indent": "off"
+          }
+        }
+    }
+}

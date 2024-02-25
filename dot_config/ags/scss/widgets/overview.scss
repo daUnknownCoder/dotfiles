@@ -1,0 +1,43 @@
+// #F7768E, #9ECE6A, #E0AF68, #7AA2F7, #BB9AF7, #7DCFFF, #A9B1D6, #FF9E64, #2394AC, #C59663
+window#overview .window-content {
+    @include floating-widget;
+    @include spacing;
+    background-color: #191919;
+    padding: 20px;
+    margin: 10px;
+    .workspace {
+        margin: 0 $padding;
+        &:last-child {
+            margin-right: 0;
+        }
+        &:first-child {
+            margin-left: 0;
+        }
+        &.active > widget {
+            border-color: $accent;
+            color: #191919;
+        }
+
+        > widget {
+            @include widget;
+            // background-color: #000000;
+            border-radius: if($radii == 0, 0, $radii + $padding);
+
+            &:drop(active) {
+                border-color: $accent;
+            }
+        }
+    }
+
+    .client {
+        @include button;
+        border-radius: $radii;
+        margin: $padding;
+        padding: 5px;
+
+        &.hidden {
+            @include hidden;
+            transition: 0;
+        }
+    }
+}

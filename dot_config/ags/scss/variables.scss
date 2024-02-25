@@ -1,0 +1,30 @@
+// variables are defined in options.js
+// these ones are derived from those
+
+$hover: transparentize($_widget-bg, 0.9);
+$widget-bg: transparentize($_widget-bg, 0.9);
+$active-gradient: linear-gradient($accent-gradient);
+
+$hover-fg: if(
+    $color-scheme == 'dark',
+    lighten($fg-color, 10%),
+    darken($fg-color, 8%)
+);
+
+$border-color: transparentize($_border-color, 1);
+$border: $border-width solid $border-color;
+
+$text-shadow: 2px 2px 2px $shadow;
+
+$popover-border-color: transparentize($_border-color, 1);
+$popover-padding: $padding * $popover-padding-multiplier;
+$popover-radius: if($radii == 0, 0, $radii + $popover-padding);
+
+$wm-gaps: floor($spacing * $wm-gaps-multiplier);
+
+$shader-fg: #fff;
+
+* {
+    font-size: 15px;
+    font-family: 'Space Grotesk';
+}

@@ -1,0 +1,264 @@
+@mixin calendar {
+    @include widget;
+    padding: $padding * 2 $padding * 2 0;
+
+    calendar {
+        all: unset;
+
+        &.button {
+            @include button($flat: true);
+        }
+
+        &:selected {
+            box-shadow:
+                inset 0 -8px 0 0 transparentize($accent, 0.5),
+                inset 0 0 0 1px $accent;
+            border-radius: 16px;
+        }
+
+        &.header {
+            background-color: transparent;
+            border: none;
+            color: transparentize($fg-color, 0.5);
+        }
+
+        &.highlight {
+            background-color: transparent;
+            color: transparentize($accent, 0.5);
+        }
+
+        &:indeterminate {
+            color: transparentize($fg-color, 0.9);
+        }
+        font-size: 1.1em;
+        padding: 0.1em;
+    }
+}
+
+window#dashboard .window-content {
+    @include floating-widget;
+    margin-top: 1.1em;
+
+    .notifications {
+        min-width: $notifications-width;
+
+        .header {
+            margin-bottom: $spacing;
+            margin-right: $spacing;
+
+            > label {
+                margin-left: $radii / 2;
+            }
+
+            button {
+                @include button;
+                padding: $padding/2 $padding;
+            }
+        }
+
+        .notification-scrollable {
+            @include scrollable;
+        }
+
+        .notification-list {
+            margin-right: $spacing;
+        }
+
+        .notification {
+            @include notification;
+
+            > box {
+                @include widget;
+                padding: $padding;
+                margin-bottom: $spacing;
+            }
+        }
+
+        .placeholder {
+            image {
+                font-size: 7em;
+            }
+            label {
+                font-size: 1.2em;
+            }
+        }
+    }
+
+    separator {
+        background-color: $popover-border-color;
+        min-width: 2px;
+        border-radius: $radii * 0.6;
+        margin-right: $spacing;
+    }
+
+    .datemenu,
+    .system-info {
+        @include spacing;
+    }
+
+    .clock-box {
+        padding: $padding;
+
+        .clock {
+            font-size: 5em;
+        }
+
+        .uptime {
+            color: transparentize($fg-color, 0.2);
+        }
+    }
+
+    .calendar {
+        @include calendar;
+    }
+
+    .circular-progress-box {
+        @include widget;
+        padding: $padding;
+
+        .circular-progress {
+            min-height: $sys-info-size;
+            min-width: $sys-info-size;
+            margin: $padding/2;
+            font-size: $padding;
+            background-color: $bg-color;
+            color: $accent;
+
+            image {
+                font-size: 1.8em;
+            }
+        }
+    }
+}
+
+.weather {
+    background-color: transparentize(#171717, 0.5);
+    border-radius: 16px;
+}
+
+.weather-refresh {
+    all: unset;
+    border: none;
+    margin: 10px;
+    padding: 10px;
+}
+
+.weather-refresh:hover {
+    color: gray;
+}
+
+.weather-refresh:active {
+    color: black;
+}
+
+.weather-refresh:focus {
+    color: $accent;
+}
+
+.weather-info {
+    background-color: rgba(81, 164, 231, 0.76);
+    border-radius: 16px;
+    padding: 0.55em;
+    margin: 2 5px;
+
+    min-width: 5em;
+    min-height: 5em;
+}
+
+.weather-temperature {
+    margin-bottom: 5.5em;
+}
+
+.weather-day {
+    padding: 9px;
+}
+
+.weather-day:first-child {
+    padding: 9px;
+}
+
+window#weather .weather .tooltip {
+    .weather-spacing {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .qsweather-widget {
+        margin: 2px;
+    }
+
+    .qs-weather-box-child {
+        min-width: 5em;
+        min-height: 10em;
+        .weather-icon {
+            font-size: 1.5em;
+        }
+    }
+    margin: 10px;
+
+    .qs-weather-box-main {
+        min-width: 6.5em;
+    }
+}
+
+// shared logic for weather widget, first one only goes to qs
+window#quicksettings .window-content,
+window#weather .tooltip {
+    .qsweather-widget {
+        margin: 10px;
+        padding: 10px;
+        border-radius: 16px;
+        min-width: 5em;
+        min-height: 10em;
+    }
+
+    .qs-weather-box-main {
+        margin: 0.5em;
+
+        .weather-icon {
+            font-size: 2.42em;
+            margin-left: 0.5em;
+        }
+
+        .weather-temperature {
+            all: unset;
+            font-size: 1.6em;
+        }
+
+        .weather-rain {
+            margin-left: 1.2em;
+        }
+
+        .weather-hour {
+            margin-right: 1em;
+        }
+    }
+
+    .qs-weather-box-child {
+        padding-bottom: 0.7em;
+
+        .weather-icon {
+            margin-top: 1.9em;
+            font-size: 24px;
+        }
+
+        .weather-temperature {
+            all: unset;
+            margin-bottom: 0.2em;
+            margin-bottom: 0.2em;
+            font-size: 20px;
+        }
+    }
+
+    // .weather-max {
+    //     color: #FF8C00;
+    // }
+
+    // .weather-min {
+    //     color: #87ceeb;
+    // }
+}
+
+.weather.panel-button label {
+    font-size: 15px;
+}

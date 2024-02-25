@@ -1,0 +1,151 @@
+import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
+import Notifications from 'resource:///com/github/Aylur/ags/service/notifications.js';
+import Audio from 'resource:///com/github/Aylur/ags/service/audio.js';
+import options from '../options.js';
+import icons from '../icons.js';
+import { reloadScss, scssWatcher } from './scss.js';
+import { wallpaper } from './wallpaper.js';
+import { hyprlandInit, setupHyprland } from './hyprland.js';
+import { globals } from './globals.js';
+import { showAbout } from '../about/about.js';
+import Gtk from 'gi://Gtk?version=3.0';
+
+export function init() {
+    notificationBlacklist();
+    warnOnLowBattery();
+    globals();
+    tmux();
+    gsettigsColorScheme();
+    gtkFontSettings();
+    scssWatcher();
+    dependandOptions();
+
+    reloadScss();
+    hyprlandInit();
+    setupHyprland();
+    wallpaper();
+    showAbout();
+
+    Audio.maxStreamVolume = 1.05;
+}
+
+function dependandOptions() {
+    options.bar.style.connect('changed', ({ value }) => {
+        if (value !== 'normal')
+            options.desktop.screen_corners.setValue(false, true);
+    });
+}
+
+function tmux() {
+    if (!Utils.exec('which tmux')) return;
+
+    /** @param {string} scss */
+    function getColor(scss) {
+        if (scss.includes('#')) return scss;
+
+        if (scss.includes('$')) {
+            const opt = options
+                .list()
+                .find(opt => opt.scss === scss.replace('$', ''));
+            return opt?.value;
+        }
+    }
+
+    options.theme.accent.accent.connect('changed', ({ value }) =>
+        Utils.execAsync(`tmux set @main_accent ${getColor(value)}`).catch(err =>
+            console.error(err.message)
+        )
+    );
+}
+
+function gsettigsColorScheme() {
+    if (!Utils.exec('which gsettings')) return;
+
+    options.theme.scheme.connect('changed', ({ value }) => {
+        const gsettings =
+            'gsettings set org.gnome.desktop.interface color-scheme';
+        Utils.execAsync(`${gsettings} "prefer-${value}"`).catch(err =>
+            console.error(err.message)
+        );
+    });
+}
+
+function gtkFontSettings() {
+    const settings = Gtk.Settings.get_default();
+    if (!settings) {
+        console.error(Error('Gtk.Settings unavailable'));
+        return;
+    }
+
+    const callback = () => {
+        const { size, font } = options.font;
+        settings.gtk_font_name = `${font.value} ${size.value}`;
+    };
+
+    options.font.font.connect('notify::value', callback);
+    options.font.size.connect('notify::value', callback);
+}
+
+function notificationBlacklist() {
+    Notifications.connect('notified', (_, id) => {
+        const n = Notifications.getNotification(id);
+        options.notifications.black_list.value.forEach(item => {
+            if (n?.app_name.includes(item) || n?.app_entry?.includes(item))
+                n.close();
+        });
+    });
+}
+
+function warnOnLowBattery() {
+    let lowNotified = false;
+    let mediumNotified = false;
+    let highNotified = false;
+
+    Battery.connect('notify::percent', () => {
+        const low = options.battery.low.value;
+        const medium = options.battery.medium.value;
+        const high = options.battery.high.value;
+
+        if (Battery.percent <= low && !lowNotified && !Battery.charging) {
+            lowNotified = true;
+            Utils.execAsync([
+                'notify-send',
+                `${Battery.percent}% Battery Left`,
+                '-i',
+                icons.battery.warning,
+                '-u',
+                'critical',
+            ]);
+        } else if (Battery.percent > low && Battery.percent < medium) {
+            lowNotified = false;
+        }
+
+        if (Battery.percent == medium && !mediumNotified) {
+            mediumNotified = true;
+            Utils.execAsync([
+                'notify-send',
+                `${Battery.percent}% Battery Left`,
+                '-i',
+                icons.battery.warning,
+                '-u',
+                'normal',
+            ]);
+        } else if (Battery.percent > medium && Battery.percent < high) {
+            mediumNotified = false;
+        }
+
+        if (Battery.percent >= high && !highNotified && Battery.charging) {
+            highNotified = true;
+            Utils.execAsync([
+                'notify-send',
+                `${Battery.percent}% Battery Left`,
+                '-i',
+                icons.battery.warning,
+                '-u',
+                'low',
+            ]);
+        } else if (Battery.percent < high) {
+            highNotified = false;
+        }
+    });
+}

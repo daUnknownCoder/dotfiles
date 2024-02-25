@@ -1,0 +1,41 @@
+window.corner .corner {
+    background-color: if($screen-corners, $bg-color, transparent);
+    border-radius: if($screen-corners, $radii * 2, 0);
+}
+
+window.desktop {
+    .clock-box {
+        border-radius: max($radii - 5px, 0);
+        padding: 20px 14px;
+        padding-right: 30px;
+
+        .clock {
+            color: $wallpaper-fg;
+            font-size: 120px;
+            font-family: 'Potra';
+        }
+
+        .separator-box {
+            padding: 24px 12px;
+
+            separator {
+                border-radius: $radii;
+                min-width: 16px;
+                min-height: 16px;
+                background-color: $wallpaper-fg;
+            }
+        }
+    }
+
+    .date {
+        color: $wallpaper-fg;
+        font-size: 35px;
+        font-family: 'Doctor Glitch';
+    }
+}
+
+.desktop-menu {
+    image {
+        margin-right: 6px;
+    }
+}
