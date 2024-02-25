@@ -1,0 +1,4 @@
+#!/bin/bash
+hyprctl setcursor GoogleDot-Blue 20
+gsettings set org.gnome.desktop.interface cursor-theme GoogleDot-Blue
+sleep 5

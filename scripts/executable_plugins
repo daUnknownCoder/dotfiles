@@ -1,0 +1,7 @@
+#!/bin/bash
+hyprpm enable hych -n
+sleep 5
+hyprpm enable hyprfocus -n
+sleep 5
+hyprpm enable hycov -n
+sleep 5
