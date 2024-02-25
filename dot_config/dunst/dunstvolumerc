@@ -1,0 +1,3 @@
+[xfcevolume]
+    summary = "*"
+    script = "notify-send 'Volume: $(amixer get Master | grep 'Mono:' | awk '{print $4}')'"
