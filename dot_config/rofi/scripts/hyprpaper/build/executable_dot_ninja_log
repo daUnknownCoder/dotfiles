@@ -1,0 +1,13 @@
+# ninja log v5
+14	3363	1690204189329574037	CMakeFiles/hyprpaper.dir/src/helpers/Vector2D.cpp.o	bf826beefae387c9
+10	19765	1690204205648557574	CMakeFiles/hyprpaper.dir/src/helpers/MiscFunctions.cpp.o	5d9f8acd5a4789a2
+2	24944	1690204210875872691	CMakeFiles/hyprpaper.dir/src/debug/Log.cpp.o	8694f3d001d9e7f6
+3363	24949	1690204210874872631	CMakeFiles/hyprpaper.dir/src/render/WallpaperTarget.cpp.o	6b70f9f7e3e65bac
+5	24949	1690204210870872390	CMakeFiles/hyprpaper.dir/src/helpers/Jpeg.cpp.o	232aafcb9f25567a
+15	24951	1690204210888873475	CMakeFiles/hyprpaper.dir/src/ipc/Socket.cpp.o	8ffb6749024afe59
+16	24953	1690204210873872570	CMakeFiles/hyprpaper.dir/src/main.cpp.o	9f419f66c960878c
+19	24953	1690204210876872752	CMakeFiles/hyprpaper.dir/src/render/LayerSurface.cpp.o	2f09c4a2992aa947
+3	25118	1690204211083885231	CMakeFiles/hyprpaper.dir/src/events/Events.cpp.o	e7c3ee4387093e79
+2	26880	1690204212844991404	CMakeFiles/hyprpaper.dir/src/config/ConfigManager.cpp.o	5736030485eeb808
+1	27065	1690204213031002618	CMakeFiles/hyprpaper.dir/src/Hyprpaper.cpp.o	49cae83a10df397e
+27065	36762	1690204222726587205	hyprpaper	c0853a360d279343

@@ -1,0 +1,5 @@
+/home/coder-takshil/.config/rofi/scripts/hyprpaper/build/CMakeFiles/hyprpaper.dir
+/home/coder-takshil/.config/rofi/scripts/hyprpaper/build/CMakeFiles/package.dir
+/home/coder-takshil/.config/rofi/scripts/hyprpaper/build/CMakeFiles/package_source.dir
+/home/coder-takshil/.config/rofi/scripts/hyprpaper/build/CMakeFiles/edit_cache.dir
+/home/coder-takshil/.config/rofi/scripts/hyprpaper/build/CMakeFiles/rebuild_cache.dir
