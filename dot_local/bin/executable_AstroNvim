@@ -1,0 +1,3 @@
+#!/bin/bash
+export NVIM_APPNAME=AstroNvim
+exec nvim "$@"
