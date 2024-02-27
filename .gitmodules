@@ -1,0 +1,15 @@
+[submodule "dot_config/AstroNvim"]
+	path = dot_config/AstroNvim
+	url = https://github.com/AstroNvim/AstroNvim
+[submodule "dot_config/NeutronVim"]
+	path = dot_config/NeutronVim
+	url = https://github.com/daUnknownCoder/NeutronVim
+[submodule "dot_config/NvChad"]
+	path = dot_config/NvChad
+	url = https://github.com/NvChad/NvChad
+[submodule "dot_config/LazyVim"]
+	path = dot_config/LazyVim
+	url = https://github.com/LazyVim/LazyVim
+[submodule "dot_config/Kickstart"]
+	path = dot_config/Kickstart
+	url = https://github.com/nvim-lua/kickstart.nvim
