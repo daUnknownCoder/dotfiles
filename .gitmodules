@@ -1,0 +1,3 @@
+[submodule "dot_config/AstroNvim"]
+    path = dot_config/AstroNvim
+    url = https://github.com/AstroNvim/AstroNvim
